@@ -67,7 +67,7 @@ if (Settings.catchErrors) {
 }
 const port = Settings.port || Settings.internal.web.port || 3000
 const host = Settings.internal.web.host || 'localhost'
-if (!module.parent) {
+// if (!module.parent) {
   // Called directly
 
   // We want to make sure that we provided a password through the environment.
@@ -80,7 +80,7 @@ if (!module.parent) {
     // wait until the process is ready before monitoring the event loop
     metrics.event_loop.monitor(logger)
   })
-}
+// }
 
 // handle SIGTERM for graceful shutdown in kubernetes
 process.on('SIGTERM', function(signal) {
@@ -88,4 +88,38 @@ process.on('SIGTERM', function(signal) {
   Settings.shuttingDown = true
 })
 
-module.exports = Server.server
+// module.exports = Server.server
+exports.main = test
+
+function test(params={}){
+  const runmiddlewareFlag = false;
+  // const url = params.url || '/project/5e9724266a66f10065ea52ae/compile';
+  const url = params.url || '/status';
+  // const method = params.__ow_method || 'post';
+  const method = params.__ow_method || 'get';
+
+  const { promisify } = require('util')
+  const request = require("request")
+  const reqPromise = promisify(request[method]);
+  return (async () => {
+    let result;
+    if (runmiddlewareFlag == true) {
+      // result = await invoke(url, { method, body: params });
+    } else {
+      result = await reqPromise({
+        // url: `http://${host}:${port}/${url}`,
+        url: `http://localhost:3000${url}`,
+        json: params
+      })
+    }
+    return {body: result.body}
+  })();
+}
+
+
+if (!module.parent) {
+  (async () => {
+    let result = await test();
+    console.log(result);
+  })();
+}
