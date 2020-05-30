@@ -46,36 +46,6 @@ module.exports = settings =
 			password: process.env["REDIS_PASSWORD"] or ""
 			maxRetriesPerRequest: parseInt(process.env["REDIS_MAX_RETRIES_PER_REQUEST"] || '20')
 
-		# websessions:
-		# 	cluster: [
-		# 		{host: 'localhost', port: 7000}
-		# 		{host: 'localhost', port: 7001}
-		# 		{host: 'localhost', port: 7002}
-		# 		{host: 'localhost', port: 7003}
-		# 		{host: 'localhost', port: 7004}
-		# 		{host: 'localhost', port: 7005}
-		# 	]
-
-		# ratelimiter:
-		# 	cluster: [
-		# 		{host: 'localhost', port: 7000}
-		# 		{host: 'localhost', port: 7001}
-		# 		{host: 'localhost', port: 7002}
-		# 		{host: 'localhost', port: 7003}
-		# 		{host: 'localhost', port: 7004}
-		# 		{host: 'localhost', port: 7005}
-		# 	]
-
-		# cooldown:
-		# 	cluster: [
-		# 		{host: 'localhost', port: 7000}
-		# 		{host: 'localhost', port: 7001}
-		# 		{host: 'localhost', port: 7002}
-		# 		{host: 'localhost', port: 7003}
-		# 		{host: 'localhost', port: 7004}
-		# 		{host: 'localhost', port: 7005}
-		# 	]
-
 		api:
 			host: process.env['REDIS_HOST'] || "localhost"
 			port: process.env['REDIS_PORT'] || "6379"

@@ -56,6 +56,5 @@ Gemfile.lock
 
 docker-shared.yml
 
-config/*.coffee
 
 modules/**/Makefile
