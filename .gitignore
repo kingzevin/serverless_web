@@ -58,3 +58,5 @@ docker-shared.yml
 
 
 modules/**/Makefile
+public
+public/*
