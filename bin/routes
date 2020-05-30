@@ -105,6 +105,7 @@ const main = () => {
   // Find all routers
   glob('*[rR]outer.js', { matchBase: true }, (err, files) => {
     for (file of files) {
+      // zevin: keep it first
       if (file.match('^node_modules.*$') || file.match('.*/public/.*')) {
         continue
       }

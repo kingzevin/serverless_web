@@ -22,7 +22,9 @@ if (!IS_DEV_ENV) {
   // containers can't coordinate, so there no guarantee that the manifest file
   // exists when the web server boots. We therefore ignore the manifest file in
   // dev reload
-  webpackManifest = require(`../../../public/manifest.json`)
+  // webpackManifest = require(`../../../public/manifest.json`)
+// zevin:
+  webpackManifest = require(`../../../../public/manifest.json`)
 }
 
 module.exports = function(webRouter, privateApiRouter, publicApiRouter) {

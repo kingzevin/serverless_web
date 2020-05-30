@@ -9,6 +9,40 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
+// zevin's config
+const envZ = {
+  SHARELATEX_MONGO_URL: "mongodb://172.17.0.1/sharelatex",
+  MONGO_HOST: '172.17.0.1',
+  SHARELATEX_REDIS_HOST: '172.17.0.1',
+  REDIS_HOST: '172.17.0.1',
+  WEB_HOST: 'localhost',
+  TAGS_HOST: '172.17.0.1',
+  CLSI_HOST: '172.17.0.1',
+  CHAT_HOST: '172.17.0.1',
+  DOCSTORE_HOST: '172.17.0.1',
+  SPELLING_HOST: '172.17.0.1',
+  FILESTORE_HOST: '172.17.0.1',
+  DOCUMENT_UPDATER_HOST: '172.17.0.1',
+  NOTIFICATIONS_HOST: '172.17.0.1',
+  CONTACTS_HOST: '172.17.0.1',
+  LISTEN_ADDRESS: '0.0.0.0',
+  REALTIME_HOST: '172.17.0.1',
+  TRACK_CHANGES_HOST: '172.17.0.1',
+  WEB_API_HOST: 'localhost',
+  ENABLE_CONVERSIONS: 'true',
+  WEB_API_USER: 'sharelatex',
+  ENABLED_LINKED_FILE_TYPES: 'url,project_file',
+  WEB_API_PASSWORD: 'rAp8aFvtk77m20PG6Kedzt3iOOrWKJ3pL5eiaQsP6s',
+  SESSION_SECRET: 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc',
+  SHARELATEX_SESSION_SECRET: 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc',
+  SHAREALTEX_CONFIG:__dirname + '/settings.coffee'
+}
+
+for (const key in envZ) {
+  process.env[key] = envZ[key];
+}
+
+// 
 const metrics = require('metrics-sharelatex')
 metrics.initialize(process.env['METRICS_APP_NAME'] || 'web')
 const Settings = require('settings-sharelatex')

@@ -74,7 +74,9 @@ if (Settings.behindProxy) {
 }
 
 webRouter.use(
-  express.static(Path.join(__dirname, '/../../../public'), {
+  // express.static(Path.join(__dirname, '/../../../public'), {
+// zevin:
+  express.static(Path.join(__dirname, '/../../../../public'), {
     maxAge: STATIC_CACHE_AGE
   })
 )

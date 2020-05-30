@@ -87,6 +87,7 @@ async function _transferOwnership(projectId, previousOwnerId, newOwnerId) {
     { _id: projectId },
     { $set: { owner_ref: newOwnerId } }
   ).exec()
+  // zevin: when transferOwnership, add contacts
   await CollaboratorsHandler.promises.addUserIdToProject(
     projectId,
     newOwnerId,

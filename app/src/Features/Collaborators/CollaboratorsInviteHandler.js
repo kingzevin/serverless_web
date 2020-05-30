@@ -293,6 +293,7 @@ module.exports = CollaboratorsInviteHandler = {
           return callback(err)
         }
         const inviteId = invite._id
+        // zevin: when accepting invitation, add contacts
         return CollaboratorsHandler.addUserIdToProject(
           projectId,
           invite.sendingUserId,
