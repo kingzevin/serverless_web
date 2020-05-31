@@ -1,9 +1,10 @@
 {
-  "name": "web-overleaf",
+  "name": "web-zevin",
   "version": "0.1.4",
   "description": "The HTTP front end for ShareLaTeX",
   "license": "AGPL-3.0-only",
   "private": true,
+  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/sharelatex/web-sharelatex.git"
