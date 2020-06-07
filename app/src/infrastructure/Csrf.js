@@ -16,9 +16,9 @@
  */
 let Csrf
 const csurf = require('csurf')
-const csrf = csurf()
-// // zevin
-// const csrf = csurf({ cookie: true })
+// const csrf = csurf()
+// zevin
+const csrf = csurf({ cookie: true })
 
 // Wrapper for `csurf` middleware that provides a list of routes that can be excluded from csrf checks.
 //
@@ -52,10 +52,10 @@ module.exports = Csrf = class Csrf {
     // token' error from csurf and continue on...
 
     // check whether the request method is excluded for the specified route
-    // zevin: bypass the csrf check
-    return csrf(req, res, err => {
-      return next()
-    });
+    // // zevin: bypass the csrf check
+    // return csrf(req, res, err => {
+    //   return next()
+    // });
     if (
       (this.excluded_routes[req.path] != null
         ? this.excluded_routes[req.path][req.method]
