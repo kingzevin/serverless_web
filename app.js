@@ -10,37 +10,35 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // zevin's config
-const envZ = {
-  SHARELATEX_MONGO_URL: "mongodb://172.17.0.1/sharelatex",
-  MONGO_HOST: '172.17.0.1',
-  SHARELATEX_REDIS_HOST: '172.17.0.1',
-  REDIS_HOST: '172.17.0.1',
-  WEB_HOST: 'localhost',
-  TAGS_HOST: '172.17.0.1',
-  CLSI_HOST: '172.17.0.1',
-  CHAT_HOST: '172.17.0.1',
-  DOCSTORE_HOST: '172.17.0.1',
-  SPELLING_HOST: '172.17.0.1',
-  FILESTORE_HOST: '172.17.0.1',
-  DOCUMENT_UPDATER_HOST: '172.17.0.1',
-  NOTIFICATIONS_HOST: '172.17.0.1',
-  CONTACTS_HOST: '172.17.0.1',
-  LISTEN_ADDRESS: '0.0.0.0',
-  REALTIME_HOST: '172.17.0.1',
-  TRACK_CHANGES_HOST: '172.17.0.1',
-  WEB_API_HOST: 'localhost',
-  ENABLE_CONVERSIONS: 'true',
-  WEB_API_USER: 'sharelatex',
-  ENABLED_LINKED_FILE_TYPES: 'url,project_file',
-  WEB_API_PASSWORD: 'rAp8aFvtk77m20PG6Kedzt3iOOrWKJ3pL5eiaQsP6s',
-  SESSION_SECRET: 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc',
-  SHARELATEX_SESSION_SECRET: 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc',
-  SHAREALTEX_CONFIG:__dirname + '/settings.coffee'
-}
-
-for (const key in envZ) {
-  process.env[key] = envZ[key];
-}
+process.env["WEB_API_HOST"] = 'localhost';
+process.env["WEB_HOST"] = 'localhost';
+process.env["SHARELATEX_MONGO_URL"] = "mongodb://172.17.0.1/sharelatex";
+process.env["MONGO_HOST"] = '172.17.0.1';
+process.env["SHARELATEX_REDIS_HOST"] = '172.17.0.1';
+process.env["REDIS_HOST"] = '172.17.0.1';
+process.env["TAGS_HOST"] = '172.17.0.1';
+process.env["CLSI_HOST"] = '172.17.0.1';
+process.env["CHAT_HOST"] = '172.17.0.1';
+process.env["DOCSTORE_HOST"] = '172.17.0.1';
+process.env["SPELLING_HOST"] = '172.17.0.1';
+process.env["FILESTORE_HOST"] = '172.17.0.1';
+process.env["DOCUMENT_UPDATER_HOST"] = '172.17.0.1';
+process.env["NOTIFICATIONS_HOST"] = '172.17.0.1';
+process.env["CONTACTS_HOST"] = '172.17.0.1';
+process.env["LISTEN_ADDRESS"] = '0.0.0.0';
+process.env["REALTIME_HOST"] = '172.17.0.1';
+process.env["TRACK_CHANGES_HOST"] = '172.17.0.1';
+process.env["ENABLE_CONVERSIONS"] = 'true';
+process.env["WEB_API_USER"] = 'sharelatex';
+process.env["ENABLED_LINKED_FILE_TYPES"] = 'url;project_file';
+process.env["SHARELATEX_APP_NAME"] = 'Overleaf Community Edition';
+process.env["APP_NAME"] = 'Overleaf Community Edition';
+process.env["WEB_API_PASSWORD"] = 'rAp8aFvtk77m20PG6Kedzt3iOOrWKJ3pL5eiaQsP6s';
+process.env["SESSION_SECRET"] = 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc';
+process.env["SHARELATEX_SESSION_SECRET"] = 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc';
+process.env["SHAREALTEX_CONFIG"] = __dirname + '/settings.coffee';
+// process.env["SHARELATEX_ALLOW_PUBLIC_ACCESS"] = 'true';
+// process.env["SHARELATEX_ALLOW_ANONYMOUS_READ_AND_WRITE_SHARING"] = 'true';
 
 // 
 const metrics = require('metrics-sharelatex')
@@ -93,10 +91,19 @@ exports.main = test
 
 function test(params={}){
   const runmiddlewareFlag = false;
-  // const url = params.url || '/project/5e9724266a66f10065ea52ae/compile';
-  const url = params.url || '/status';
+  // const url = params.url || '/project/5ec7b4125cfe83006755763e/compile';
+  const url = params.__ow_path || '/favicon.ico';
   // const method = params.__ow_method || 'post';
   const method = params.__ow_method || 'get';
+  const headers = params.__ow_headers || {
+    'Connection': 'keep-alive',
+    'Accept': 'application/json, text/plain, */*',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36',
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7,fr;q=0.6',
+    'Cookie': 'sharelatex.sid=s%3AVVk1PqK4VnJLoGBMSFYwsoLT4W0yulti.JR4Yj544rl6yg%2BaOoLzky5ke8lS51jrYiYnpLN4MzU4'
+  };
 
   const { promisify } = require('util')
   const request = require("request")
@@ -107,15 +114,32 @@ function test(params={}){
       // result = await invoke(url, { method, body: params });
     } else {
       result = await reqPromise({
-        // url: `http://${host}:${port}/${url}`,
         url: `http://localhost:3000${url}`,
-        json: params
+        json: params,
+        headers: headers
       })
     }
-    return {body: result.body}
+    var response = JSON.parse(JSON.stringify(result));
+
+    const type = response.headers["content-type"];
+    delete response.request
+    // if (type.includes("image")) {
+    //   // const prefix = "data:" + type + ";base64,";
+    //   const prefix = "";
+    //   // const base64 = response.body;
+    //   const base64 = response.body.toString('base64');
+    //   const data = prefix + base64;
+    //   // response.setEncoding('binary');
+    //   response.body = data
+    //   // response["data"] = data
+    //   // delete response.body
+    // }
+    // console.log(response.body)
+    return response
   })();
 }
-
+// unsupported types:
+// woff2, svg, png, ico, woff, .js > 1MB
 
 if (!module.parent) {
   (async () => {

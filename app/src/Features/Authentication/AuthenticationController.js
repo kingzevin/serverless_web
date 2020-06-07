@@ -353,6 +353,8 @@ const AuthenticationController = (module.exports = {
     } else if (AuthenticationController.isUserLoggedIn(req)) {
       next()
     } else {
+      // next()
+      // return;
       logger.log(
         { url: req.url },
         'user trying to access endpoint not in global whitelist'
