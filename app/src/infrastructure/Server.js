@@ -101,7 +101,9 @@ webRouter.use(cookieParser(Settings.security.sessionSecret))
 SessionAutostartMiddleware.applyInitialMiddleware(webRouter)
 webRouter.use(
   session({
-    resave: false,
+    // zevin:
+    // resave: false,
+    resave: true,
     saveUninitialized: false,
     secret: Settings.security.sessionSecret,
     proxy: Settings.behindProxy,

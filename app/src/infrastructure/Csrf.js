@@ -16,9 +16,7 @@
  */
 let Csrf
 const csurf = require('csurf')
-// const csrf = csurf()
-// zevin
-const csrf = csurf({ cookie: true })
+const csrf = csurf()
 
 // Wrapper for `csurf` middleware that provides a list of routes that can be excluded from csrf checks.
 //
