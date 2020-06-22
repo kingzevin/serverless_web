@@ -19,30 +19,27 @@ process.env["SHARELATEX_REDIS_HOST"] = '172.17.0.1';
 process.env["REDIS_HOST"] = '172.17.0.1';
 process.env["SPELLING_HOST"] = '172.17.0.1';
 process.env['SPELLING_URL'] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/spelling'
-process.env['SPELLING_URL'] = `http://${process.env['SPELLING_HOST']}:3005`
 process.env["CHAT_HOST"] = '172.17.0.1';
 process.env["CHAT_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/chat';
-process.env["CHAT_URL"] = `http://${process.env['CHAT_HOST']}:3010`
 process.env["CONTACTS_HOST"] = '172.17.0.1';
 process.env["CONTACTS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/contacts';
-process.env["CONTACTS_URL"] = `http://${process.env['CONTACTS_HOST']}:3036`
 process.env["NOTIFICATIONS_HOST"] = '172.17.0.1';
 process.env["NOTIFICATIONS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/notifications';
-process.env["NOTIFICATIONS_URL"] = `http://${process.env['NOTIFICATIONS_HOST']}:3042`
+// process.env["NOTIFICATIONS_URL"] = `http://${process.env['NOTIFICATIONS_HOST']}:3042` 
+// check notificaitons
 process.env["TAGS_HOST"] = '172.17.0.1';
 process.env["TAGS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/tags';
-process.env["TAGS_URL"] = `http://${process.env['TAGS_HOST']}:3012`
+// process.env["TAGS_URL"] = `http://${process.env['TAGS_HOST']}:3012`
 process.env["DOCSTORE_HOST"] = '172.17.0.1';
 process.env["DOCSTORE_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/docstore';
-process.env["DOCSTORE_URL"] = `http://${process.env['DOCSTORE_HOST']}:3016`
 process.env["CLSI_HOST"] = '172.17.0.1';
 process.env["CLSI_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/clsi';
-process.env["CLSI_URL"] = `http://${process.env['CLSI_HOST']}:3013`
+process.env["TRACK_CHANGES_HOST"] = '172.17.0.1';
+process.env["TRACK_CHANGES_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/track-changes';
 process.env["FILESTORE_HOST"] = '172.17.0.1';
 process.env["DOCUMENT_UPDATER_HOST"] = '172.17.0.1';
 process.env["LISTEN_ADDRESS"] = '0.0.0.0';
 process.env["REALTIME_HOST"] = '172.17.0.1';
-process.env["TRACK_CHANGES_HOST"] = '172.17.0.1';
 process.env["ENABLE_CONVERSIONS"] = 'true';
 process.env["WEB_API_USER"] = 'sharelatex';
 process.env["ENABLED_LINKED_FILE_TYPES"] = 'url;project_file';
@@ -105,7 +102,7 @@ exports.main = test
 
 function test(params={}){
   const runmiddlewareFlag = false;
-  const url = params.__ow_path || '/favicon.ico';
+  const url = params.__ow_path || '/';
   const method = params.__ow_method || 'get';
   const headers = params.__ow_headers || {
     'Connection': 'keep-alive',
@@ -125,7 +122,7 @@ function test(params={}){
     let opt={}
     opt['headers'] = headers;
     opt['url'] = `http://localhost:3000${url}`;
-    let str = params.__ow_body;
+    let str = params.__ow_body || '';
     if(str !== "" && Buffer.from(str, 'base64').toString('base64') === str){
       // base64
       params.__ow_body = Buffer.from(str, 'base64').toString('ascii');

@@ -5,6 +5,26 @@ const ProjectLocator = require('../Project/ProjectLocator')
 const Errors = require('../Errors/Errors')
 
 module.exports = {
+  getOutput(req, res) {
+    const projectId = req.params.Project_id
+    const fileId = req.params.File_id
+    const queryString = req.query
+    FileStoreHandler.getFileStream(projectId, fileId, queryString, function(
+      err,
+      stream
+    ) {
+      if (err) {
+        logger.err(
+          { err, projectId, fileId, queryString },
+          'error getting file stream for downloading file'
+        )
+        return res.sendStatus(500)
+      }
+      // mobile safari will try to render html files, prevent this
+      res.setContentDisposition('attachment', { filename: fileId})
+      stream.pipe(res)
+    })
+  },
   getFile(req, res) {
     const projectId = req.params.Project_id
     const fileId = req.params.File_id

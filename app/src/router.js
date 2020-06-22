@@ -289,10 +289,25 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
     FileStoreController.getFileHead
   )
   webRouter.get(
-    '/Project/:Project_id/file/:File_id',
+    '/Project/:Project_id/file/:File_id([0-9a-f]+)',
     AuthorizationMiddleware.ensureUserCanReadProject,
     FileStoreController.getFile
   )
+  webRouter.get(
+    '/project/:Project_id/file/:File_id(output[^/]+)',
+    AuthorizationMiddleware.ensureUserCanReadProject,
+    FileStoreController.getOutput
+  )
+  // webRouter.get(
+  //   /^\/project\/([^/]*)\/file\/output\.pdf$/,
+  //   function(req, res, next) {
+  //     const params = { Project_id: req.params[0] }
+  //     req.params = params
+  //     next()
+  //   },
+  //   AuthorizationMiddleware.ensureUserCanReadProject,
+  //   CompileController.downloadPdf
+  // )
   webRouter.post(
     '/project/:Project_id/settings',
     AuthorizationMiddleware.ensureUserCanWriteProjectSettings,

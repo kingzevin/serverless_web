@@ -91,7 +91,9 @@ module.exports = settings =
 			# url : "http://#{process.env['SPELLING_HOST'] or 'localhost'}:3005"
 			host: process.env['SPELLING_HOST']
 		trackchanges:
-			url : "http://#{process.env['TRACK_CHANGES_HOST'] or 'localhost'}:3015"
+		# zevin
+			url : "#{process.env['TRACK_CHANGES_URL']}"
+			# url : "http://#{process.env['TRACK_CHANGES_HOST'] or 'localhost'}:3015"
 		project_history:
 			sendProjectStructureOps: process.env.PROJECT_HISTORY_ENABLED == 'true' or false
 			initializeHistoryForNewProjects: process.env.PROJECT_HISTORY_ENABLED == 'true' or false
@@ -407,7 +409,7 @@ module.exports = settings =
 
 	# Use a single compile directory for all users in a project
 	# (otherwise each user has their own directory)
-	# disablePerUserCompiles: true
+	disablePerUserCompiles: true
 
 	# Domain the client (pdfjs) should download the compiled pdf from
 	pdfDownloadDomain: process.env["PDF_DOWNLOAD_DOMAIN"]  #"http://clsi-lb:3014"
