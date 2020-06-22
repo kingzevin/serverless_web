@@ -155,3 +155,4 @@ if (!module.parent) {
   })();
 }
 }).call(this);
+exports.main = test
