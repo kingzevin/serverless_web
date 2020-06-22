@@ -10,14 +10,6 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // zevin's config
-// (async () => {
-// const util = require('util');
-// const exec = util.promisify(require('child_process').exec);
-// try {
-//   await exec(`cd ${__dirname} && cp -r config ../`);
-// } catch (e) {
-//   console.error(e); // should contain code (exit code) and signal (that caused the termination).
-// }
 
 process.env["WEB_API_HOST"] = 'localhost';
 process.env["WEB_HOST"] = 'localhost';
@@ -27,18 +19,25 @@ process.env["SHARELATEX_REDIS_HOST"] = '172.17.0.1';
 process.env["REDIS_HOST"] = '172.17.0.1';
 process.env["SPELLING_HOST"] = '172.17.0.1';
 process.env['SPELLING_URL'] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/spelling'
+process.env['SPELLING_URL'] = `http://${process.env['SPELLING_HOST']}:3005`
 process.env["CHAT_HOST"] = '172.17.0.1';
 process.env["CHAT_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/chat';
+process.env["CHAT_URL"] = `http://${process.env['CHAT_HOST']}:3010`
 process.env["CONTACTS_HOST"] = '172.17.0.1';
 process.env["CONTACTS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/contacts';
+process.env["CONTACTS_URL"] = `http://${process.env['CONTACTS_HOST']}:3036`
 process.env["NOTIFICATIONS_HOST"] = '172.17.0.1';
 process.env["NOTIFICATIONS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/notifications';
+process.env["NOTIFICATIONS_URL"] = `http://${process.env['NOTIFICATIONS_HOST']}:3042`
 process.env["TAGS_HOST"] = '172.17.0.1';
 process.env["TAGS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/tags';
+process.env["TAGS_URL"] = `http://${process.env['TAGS_HOST']}:3012`
 process.env["DOCSTORE_HOST"] = '172.17.0.1';
 process.env["DOCSTORE_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/docstore';
+process.env["DOCSTORE_URL"] = `http://${process.env['DOCSTORE_HOST']}:3016`
 process.env["CLSI_HOST"] = '172.17.0.1';
 process.env["CLSI_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/clsi';
+process.env["CLSI_URL"] = `http://${process.env['CLSI_HOST']}:3013`
 process.env["FILESTORE_HOST"] = '172.17.0.1';
 process.env["DOCUMENT_UPDATER_HOST"] = '172.17.0.1';
 process.env["LISTEN_ADDRESS"] = '0.0.0.0';
@@ -154,4 +153,3 @@ if (!module.parent) {
     console.log(result);
   })();
 }
-// }).call(this);
