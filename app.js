@@ -19,6 +19,7 @@ process.env["REDIS_HOST"] = '172.17.0.1';
 process.env["TAGS_HOST"] = '172.17.0.1';
 process.env["CLSI_HOST"] = '172.17.0.1';
 process.env["CHAT_HOST"] = '172.17.0.1';
+process.env["CHAT_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/chat';
 process.env["DOCSTORE_HOST"] = '172.17.0.1';
 process.env["SPELLING_HOST"] = '172.17.0.1';
 process.env['SPELLING_URL'] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/spelling'
