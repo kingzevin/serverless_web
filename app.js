@@ -10,14 +10,14 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // zevin's config
-(async () => {
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-try {
-  await exec(`cd ${__dirname} && cp -r config ../`);
-} catch (e) {
-  console.error(e); // should contain code (exit code) and signal (that caused the termination).
-}
+// (async () => {
+// const util = require('util');
+// const exec = util.promisify(require('child_process').exec);
+// try {
+//   await exec(`cd ${__dirname} && cp -r config ../`);
+// } catch (e) {
+//   console.error(e); // should contain code (exit code) and signal (that caused the termination).
+// }
 
 process.env["WEB_API_HOST"] = 'localhost';
 process.env["WEB_HOST"] = 'localhost';
@@ -154,5 +154,4 @@ if (!module.parent) {
     console.log(result);
   })();
 }
-}).call(this);
-exports.main = test
+// }).call(this);
