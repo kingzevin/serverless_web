@@ -25,6 +25,7 @@ process.env["CONTACTS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/co
 process.env["NOTIFICATIONS_HOST"] = '172.17.0.1';
 process.env["NOTIFICATIONS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/notifications';
 process.env["TAGS_HOST"] = '172.17.0.1';
+process.env["TAGS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/tags';
 process.env["CLSI_HOST"] = '172.17.0.1';
 process.env["DOCSTORE_HOST"] = '172.17.0.1';
 process.env["FILESTORE_HOST"] = '172.17.0.1';

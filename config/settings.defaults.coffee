@@ -82,7 +82,9 @@ module.exports = settings =
 			emptyProjectFlushDelayMiliseconds: 5 * seconds
 			dropboxApp: process.env['TPDS_DROPBOX_APP']
 		tags:
-			url :"http://#{process.env['TAGS_HOST'] or 'localhost'}:3012"
+		# zevin
+			url :"#{process.env['TAGS_URL']}"
+			# url :"http://#{process.env['TAGS_HOST'] or 'localhost'}:3012"
 		spelling:
 		# zevin
 			url : "#{process.env['SPELLING_URL']}"
