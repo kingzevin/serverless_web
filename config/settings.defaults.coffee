@@ -98,8 +98,11 @@ module.exports = settings =
 			displayHistoryForNewProjects: process.env.PROJECT_HISTORY_ENABLED == 'true' or false
 			url : "http://#{process.env['PROJECT_HISTORY_HOST'] or 'localhost'}:3054"
 		docstore:
-			url : "http://#{process.env['DOCSTORE_HOST'] or 'localhost'}:3016"
-			pubUrl: "http://#{process.env['DOCSTORE_HOST'] or 'localhost'}:3016"
+		# zevin
+			url : "#{process.env['DOCSTORE_URL']}"
+			pubUrl: "#{process.env['DOCSTORE_URL']}"
+			# url : "http://#{process.env['DOCSTORE_HOST'] or 'localhost'}:3016"
+			# pubUrl: "http://#{process.env['DOCSTORE_HOST'] or 'localhost'}:3016"
 		chat:
 		# zevin
 			url: "#{process.env['CHAT_URL']"
