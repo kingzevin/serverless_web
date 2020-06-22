@@ -21,6 +21,7 @@ process.env["CLSI_HOST"] = '172.17.0.1';
 process.env["CHAT_HOST"] = '172.17.0.1';
 process.env["DOCSTORE_HOST"] = '172.17.0.1';
 process.env["SPELLING_HOST"] = '172.17.0.1';
+process.env['SPELLING_URL'] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/spelling'
 process.env["FILESTORE_HOST"] = '172.17.0.1';
 process.env["DOCUMENT_UPDATER_HOST"] = '172.17.0.1';
 process.env["NOTIFICATIONS_HOST"] = '172.17.0.1';
@@ -37,8 +38,7 @@ process.env["WEB_API_PASSWORD"] = 'rAp8aFvtk77m20PG6Kedzt3iOOrWKJ3pL5eiaQsP6s';
 process.env["SESSION_SECRET"] = 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc';
 process.env["SHARELATEX_SESSION_SECRET"] = 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc';
 process.env["SHAREALTEX_CONFIG"] = __dirname + '/settings.coffee';
-// process.env["SHARELATEX_ALLOW_PUBLIC_ACCESS"] = 'true';
-// process.env["SHARELATEX_ALLOW_ANONYMOUS_READ_AND_WRITE_SHARING"] = 'true';
+process.env['NODE_TLS_REJECT_UNAUTHORIZED']=0
 
 // 
 const metrics = require('metrics-sharelatex')
@@ -91,9 +91,7 @@ exports.main = test
 
 function test(params={}){
   const runmiddlewareFlag = false;
-  // const url = params.url || '/project/5ec7b4125cfe83006755763e/compile';
   const url = params.__ow_path || '/favicon.ico';
-  // const method = params.__ow_method || 'post';
   const method = params.__ow_method || 'get';
   const headers = params.__ow_headers || {
     'Connection': 'keep-alive',
@@ -104,42 +102,36 @@ function test(params={}){
     'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7,fr;q=0.6',
     'Cookie': 'sharelatex.sid=s%3AVVk1PqK4VnJLoGBMSFYwsoLT4W0yulti.JR4Yj544rl6yg%2BaOoLzky5ke8lS51jrYiYnpLN4MzU4'
   };
-
+  
   const { promisify } = require('util')
   const request = require("request")
   const reqPromise = promisify(request[method]);
   return (async () => {
     let result;
+    let opt={}
+    opt['headers'] = headers;
+    opt['url'] = `http://localhost:3000${url}`;
+    let str = params.__ow_body;
+    if(str !== "" && Buffer.from(str, 'base64').toString('base64') === str){
+      // base64
+      params.__ow_body = Buffer.from(str, 'base64').toString('ascii');
+    }
+    opt['body'] = params.__ow_body;
+    if(params.__ow_query !== "")
+      opt['qs'] = params.__ow_query;
+
     if (runmiddlewareFlag == true) {
       // result = await invoke(url, { method, body: params });
     } else {
-      result = await reqPromise({
-        url: `http://localhost:3000${url}`,
-        json: params,
-        headers: headers
-      })
+      result = await reqPromise(opt);        
     }
     var response = JSON.parse(JSON.stringify(result));
-
-    const type = response.headers["content-type"];
     delete response.request
-    // if (type.includes("image")) {
-    //   // const prefix = "data:" + type + ";base64,";
-    //   const prefix = "";
-    //   // const base64 = response.body;
-    //   const base64 = response.body.toString('base64');
-    //   const data = prefix + base64;
-    //   // response.setEncoding('binary');
-    //   response.body = data
-    //   // response["data"] = data
-    //   // delete response.body
-    // }
-    // console.log(response.body)
     return response
   })();
 }
 // unsupported types:
-// woff2, svg, png, ico, woff, .js > 1MB
+// woff2, svg, png, ico, woff, (.js > 1MB)
 
 if (!module.parent) {
   (async () => {

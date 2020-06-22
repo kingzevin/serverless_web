@@ -1,5 +1,5 @@
 {
-  "name": "web-zevin",
+  "name": "serverless-web",
   "version": "0.1.4",
   "description": "The HTTP front end for ShareLaTeX",
   "license": "AGPL-3.0-only",
