@@ -10,6 +10,19 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // zevin's config
+const { exec } = require("child_process");
+exec("cp -r config ../", (error, stdout, stderr) => {
+  if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+  }
+  if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      return;
+  }
+  console.log(`stdout: ${stdout}`);
+});
+
 process.env["WEB_API_HOST"] = 'localhost';
 process.env["WEB_HOST"] = 'localhost';
 process.env["SHARELATEX_MONGO_URL"] = "mongodb://172.17.0.1/sharelatex";
