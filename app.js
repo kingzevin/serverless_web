@@ -11,16 +11,14 @@
  */
 // zevin's config
 const { exec } = require("child_process");
-exec("cp -r config ../", (error, stdout, stderr) => {
+exec(`cd ${__dirname} && cp -r config ../`, (error, stdout, stderr) => {
   if (error) {
       console.log(`error: ${error.message}`);
-      return;
   }
   if (stderr) {
       console.log(`stderr: ${stderr}`);
-      return;
   }
-  console.log(`stdout: ${stdout}`);
+  // console.log(`stdout: ${stdout}`);
 });
 
 process.env["WEB_API_HOST"] = 'localhost';
