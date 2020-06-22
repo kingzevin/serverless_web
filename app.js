@@ -10,16 +10,14 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // zevin's config
-const { exec } = require("child_process");
-exec(`cd ${__dirname} && cp -r config ../`, (error, stdout, stderr) => {
-  if (error) {
-      console.log(`error: ${error.message}`);
-  }
-  if (stderr) {
-      console.log(`stderr: ${stderr}`);
-  }
-  // console.log(`stdout: ${stdout}`);
-});
+(async () => {
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+try {
+  await exec(`cd ${__dirname} && cp -r config ../`);
+} catch (e) {
+  console.error(e); // should contain code (exit code) and signal (that caused the termination).
+}
 
 process.env["WEB_API_HOST"] = 'localhost';
 process.env["WEB_HOST"] = 'localhost';
@@ -156,3 +154,4 @@ if (!module.parent) {
     console.log(result);
   })();
 }
+}).call(this);
