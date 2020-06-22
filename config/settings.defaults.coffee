@@ -137,7 +137,9 @@ module.exports = settings =
 		references:
 			url: if process.env['REFERENCES_HOST']? then "http://#{process.env['REFERENCES_HOST']}:3040" else undefined
 		notifications:
-			url: "http://#{process.env['NOTIFICATIONS_HOST'] or 'localhost'}:3042"
+		# zevin
+			url: "#{process.env['NOTIFICATIONS_URL']}"
+			# url: "http://#{process.env['NOTIFICATIONS_HOST'] or 'localhost'}:3042"
 		analytics:
 			url: "http://#{process.env['ANALYTICS_HOST'] or 'localhost'}:3050"
 		linkedUrlProxy:

@@ -1,4 +1,4 @@
-all: true
+all: raw
 
 true: 
 	./rezip.sh web
