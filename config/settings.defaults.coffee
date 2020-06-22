@@ -129,7 +129,9 @@ module.exports = settings =
 		realTime:
 			url: "http://#{process.env['REALTIME_HOST'] or 'localhost'}:3026"
 		contacts:
-			url: "http://#{process.env['CONTACTS_HOST'] or 'localhost'}:3036"
+		# zevin
+			url: "#{process.env['CONTACTS_URL']}"
+			# url: "http://#{process.env['CONTACTS_HOST'] or 'localhost'}:3036"
 		sixpack:
 			url: ""
 		references:
