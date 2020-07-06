@@ -25,11 +25,9 @@ process.env["CONTACTS_HOST"] = '172.17.0.1';
 process.env["CONTACTS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/contacts';
 process.env["NOTIFICATIONS_HOST"] = '172.17.0.1';
 process.env["NOTIFICATIONS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/notifications';
-// process.env["NOTIFICATIONS_URL"] = `http://${process.env['NOTIFICATIONS_HOST']}:3042` 
 // check notificaitons
 process.env["TAGS_HOST"] = '172.17.0.1';
 process.env["TAGS_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/tags';
-// process.env["TAGS_URL"] = `http://${process.env['TAGS_HOST']}:3012`
 process.env["DOCSTORE_HOST"] = '172.17.0.1';
 process.env["DOCSTORE_URL"] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/docstore';
 process.env["CLSI_HOST"] = '172.17.0.1';
@@ -101,7 +99,6 @@ process.on('SIGTERM', function(signal) {
 exports.main = test
 
 function test(params={}){
-  const runmiddlewareFlag = false;
   const url = params.__ow_path || '/';
   const method = params.__ow_method || 'get';
   const headers = params.__ow_headers || {
@@ -121,21 +118,18 @@ function test(params={}){
     let result;
     let opt={}
     opt['headers'] = headers;
-    opt['url'] = `http://localhost:3000${url}`;
+    opt['url'] = `http://${host}:${port}${url}`;
     let str = params.__ow_body || '';
     if(str !== "" && Buffer.from(str, 'base64').toString('base64') === str){
       // base64
       params.__ow_body = Buffer.from(str, 'base64').toString('ascii');
     }
     opt['body'] = params.__ow_body;
-    if(params.__ow_query !== "")
-      opt['qs'] = params.__ow_query;
-
-    if (runmiddlewareFlag == true) {
-      // result = await invoke(url, { method, body: params });
-    } else {
-      result = await reqPromise(opt);        
+    if(params.__ow_query !== ""){
+      const qs = '?' + params.__ow_query;
+      opt['url'] = opt['url'] + qs;
     }
+    result = await reqPromise(opt);
     var response = JSON.parse(JSON.stringify(result));
     delete response.request
     return response

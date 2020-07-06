@@ -96,7 +96,6 @@ app.use(bearerToken())
 app.use(metrics.http.monitor(logger))
 RedirectManager.apply(webRouter)
 ProxyManager.apply(publicApiRouter)
-// zevin
 webRouter.use(cookieParser(Settings.security.sessionSecret))
 SessionAutostartMiddleware.applyInitialMiddleware(webRouter)
 webRouter.use(
@@ -148,7 +147,6 @@ Modules.hooks.fire('passportSetup', passport, function(err) {
 })
 
 Modules.applyNonCsrfRouter(webRouter, privateApiRouter, publicApiRouter)
-// zevin
 webRouter.csrf = new Csrf()
 webRouter.use(webRouter.csrf.middleware)
 webRouter.use(translations.expressMiddlewear)
