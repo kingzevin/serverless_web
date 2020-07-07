@@ -76,7 +76,7 @@ module.exports = settings =
 			user: httpAuthUser
 			pass: httpAuthPass
 		documentupdater:
-			url : "http://#{process.env['DOCUPDATER_HOST'] or process.env['DOCUMENT_UPDATER_HOST'] or 'localhost'}:#{docUpdaterPort}"
+			url : process.env['DOOCUMENT_UPDATER_URL'] or "http://#{process.env['DOCUPDATER_HOST'] or process.env['DOCUMENT_UPDATER_HOST'] or 'localhost'}:#{docUpdaterPort}"
 		thirdPartyDataStore:
 			url : "http://#{process.env['TPDS_HOST'] or 'localhost'}:3002"
 			emptyProjectFlushDelayMiliseconds: 5 * seconds

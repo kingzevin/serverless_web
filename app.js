@@ -47,6 +47,7 @@ process.env["WEB_API_PASSWORD"] = 'rAp8aFvtk77m20PG6Kedzt3iOOrWKJ3pL5eiaQsP6s';
 process.env["SESSION_SECRET"] = 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc';
 process.env["SHARELATEX_SESSION_SECRET"] = 'K1pOaUSsFIoXADLUIgtIh4toKBzgoZS1vHRXNySWQc';
 process.env["SHAREALTEX_CONFIG"] = __dirname + '/settings.coffee';
+process.env['DOOCUMENT_UPDATER_URL'] = 'https://172.17.0.1/api/v1/web/guest/sharelatex/document-updater'
 process.env['NODE_TLS_REJECT_UNAUTHORIZED']=0
 
 // 
