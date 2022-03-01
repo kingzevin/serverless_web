@@ -108,7 +108,7 @@
     "redis-sharelatex": "^1.0.11",
     "request": "^2.69.0",
     "request-promise-native": "^1.0.7",
-    "requestretry": "^1.13.0",
+    "requestretry": "^7.0.0",
     "rimraf": "2.2.6",
     "rolling-rate-limiter": "git+https://github.com/ShaneKilkelly/rolling-rate-limiter.git#master",
     "sanitizer": "0.1.1",
